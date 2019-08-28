@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "./header";
-import { Router } from "@client/components/router";
+import { Router } from "@shared/components/router";
 import { renderToString } from "react-dom/server";
 
 interface Props {

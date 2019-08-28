@@ -1,3 +1,5 @@
+import * as THREE from "three";
+
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
 const camera = new THREE.PerspectiveCamera();
@@ -15,9 +17,7 @@ function configure(scene: THREE.Scene): void {
     scene.background = new THREE.Color(0.015, 0.015, 0.08);
 }
 
-function initialize(): void {
-    const container = document.getElementById("main-canvas") || document.body;
-
+export function initialize(container = document.getElementById("main-canvas") || document.body): void {
     configure(scene);
     container.appendChild(renderer.domElement);
     window.addEventListener("resize", resize);
@@ -26,4 +26,6 @@ function initialize(): void {
     loop(performance.now());
 }
 
-initialize();
+export default {
+    initialize
+};

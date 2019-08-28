@@ -10,7 +10,10 @@
             "name": "Launch Server",
             "runtimeArgs": ["-r", "ts-node/register"],
             "args": ["server.ts"],
-            "outputCapture": "std"    
+            "outputCapture": "std" ,
+            "env": {
+                "NODE_ENV": "development"
+            }   
         }
     ]
 }

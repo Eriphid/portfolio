@@ -1,5 +1,24 @@
 import React from "react";
 
+let libraries: string[];
+
+if (process.env.NODE_ENV === "development") {
+    libraries = [
+        "https://unpkg.com/react@16/umd/react.development.js",
+        "https://unpkg.com/react-dom@16/umd/react-dom.development.js",
+        "https://unpkg.com/react-router-dom/umd/react-router-dom.min.js",
+        "https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"
+    ];
+} else {
+    libraries = [
+        "https://unpkg.com/react@16/umd/react.production.min.js",
+        "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js",
+        "https://unpkg.com/react-router-dom/umd/react-router-dom.min.js",
+        "https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"
+    ];
+}
+
+const scripts = libraries.map((src, i) => <script defer key={i} crossOrigin="true" src={src}></script>);
 export function Header(props: { title?: string } = {}): JSX.Element {
     return (
         <React.Fragment>
@@ -8,12 +27,8 @@ export function Header(props: { title?: string } = {}): JSX.Element {
             <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
             {props.title && <title>{props.title}</title>}
             <link rel="stylesheet" href="/styles/main.css" />
-            <script defer crossOrigin="true" src="https://unpkg.com/react@16/umd/react.development.js"></script>
-            <script defer crossOrigin="true" src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-            <script defer src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+            {scripts}
             <script defer src="/scripts/main.js"></script>
-            <script defer src="https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"></script>
-            <script defer src="/scripts/canvas/index.js" type="module"></script>
         </React.Fragment>
     );
 }
