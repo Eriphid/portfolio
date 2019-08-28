@@ -15,4 +15,4 @@ export const Routes: Route[] = [
         path: "/",
         component: Home
     }
-]
+];
