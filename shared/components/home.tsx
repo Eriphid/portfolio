@@ -2,18 +2,24 @@ import React from "react";
 import { Body } from "./body";
 
 export class Home extends React.Component {
-    ref = React.createRef<HTMLElement>();
+    canvas?: HTMLCanvasElement;
 
     componentDidMount(): void {
         import("@client/src/canvas").then(module => {
-            module.initialize(this.ref.current || undefined);
+            module.initialize(this.canvas);
         });
     }
 
     render(): JSX.Element {
+        const setCanvasRef = (value: HTMLCanvasElement | null): void => {
+            if (value)
+                this.canvas = value;
+        };
         return (
             <Body>
-                <div id="main-canvas"></div>
+                <div className="canvas-wrapper">
+                    <canvas ref={setCanvasRef}></canvas>
+                </div>
             </Body>
         );
     }

@@ -6,15 +6,13 @@ if (process.env.NODE_ENV === "development") {
     libraries = [
         "https://unpkg.com/react@16/umd/react.development.js",
         "https://unpkg.com/react-dom@16/umd/react-dom.development.js",
-        "https://unpkg.com/react-router-dom/umd/react-router-dom.min.js",
-        "https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"
+        "https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"
     ];
 } else {
     libraries = [
         "https://unpkg.com/react@16/umd/react.production.min.js",
         "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js",
-        "https://unpkg.com/react-router-dom/umd/react-router-dom.min.js",
-        "https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"
+        "https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"
     ];
 }
 

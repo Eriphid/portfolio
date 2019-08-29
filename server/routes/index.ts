@@ -8,6 +8,7 @@ import { HTMLPage } from "@server/components/htmlpage";
 
 const router = Express.Router();
 
+router.use(Express.static(Path.join(CLIENT, "assets")));
 router.get("/favicon.ico", (req, res, _next) => res.sendFile(Path.join(CLIENT, "favicon.ico")));
 router.get("/", (req, res, _next) => {
     res.write("<!DOCTYPE html>");

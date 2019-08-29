@@ -15,8 +15,8 @@ export function HTMLPage(props: Props = {}): JSX.Element {
             <head>
                 <Header title={props.title}></Header>
             </head>
-            <body dangerouslySetInnerHTML={{ __html: renderToString(<Router location={props.location || "/"}></Router>) }}>
-
+            <body>
+                <div id="root" dangerouslySetInnerHTML={{ __html: renderToString(<Router location={props.location || "/"}></Router>) }}></div>
             </body>
         </html>
     );

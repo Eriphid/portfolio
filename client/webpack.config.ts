@@ -1,6 +1,6 @@
 import "module-alias/register";
 import Webpack from "webpack";
-import { CLIENT, SHARED } from "@server/constants";
+import { CLIENT, SHARED, ROOT } from "@server/constants";
 import Path from "path";
 
 const config: Webpack.Configuration = {
@@ -15,6 +15,10 @@ const config: Webpack.Configuration = {
             {
                 test: /\.tsx?/,
                 loader: "ts-loader"
+            },
+            {
+                test: /three/,
+                use: "imports-loader?THREE=three"
             }
         ]
     },
@@ -24,19 +28,21 @@ const config: Webpack.Configuration = {
             "@components": Path.join(CLIENT, "components"),
             "@constants": Path.join(CLIENT, "constants"),
             "@client": CLIENT,
-            "@shared": SHARED 
+            "@shared": SHARED,
+            "@three/shaders": Path.join(ROOT, "node_modules/three/examples/jsm/shaders/"),
+            "@three/postprocessing": Path.join(ROOT, "node_modules/three/examples/jsm/postprocessing/")
         }
     },
     externals: {
         "react": "React",
         "react-dom": "ReactDOM",
         "react-router-dom": "ReactRouterDOM",
-        "three": "THREE"
+        // "three": "THREE"
     }
 };
 
 switch (process.env.NODE_ENV as typeof config["mode"]) {
-    
+
     case "development":
     case "production":
     case "none":

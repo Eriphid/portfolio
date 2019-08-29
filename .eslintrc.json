@@ -31,6 +31,9 @@
                 "argsIgnorePattern": "^_"
             }
         ],
+        "@typescript-eslint/no-namespace": [
+            "off"
+        ],
         "indent": [
             "error",
             4,

@@ -1,19 +1,35 @@
-import { Point } from "./point";
 import { Size } from "./size";
+import { Mesh, PlaneGeometry, Geometry, BufferGeometry, Material, MeshLambertMaterial, Color, EdgesGeometry } from "three";
 
-export class Element{
-    position: Point = new Point();
+const defaultColor = new Color(0x05050f);
+export class NexusElement extends Mesh {
     size: Size = new Size();
 
-    get x(): number { return this.position.x; }
-    set x(value: number) { this.position.x = value; }
-    get y(): number { return this.position.y; }
-    set y(value: number) { this.position.y = value; }
-    get z(): number { return this.position.z; }
-    set z(value: number) { this.position.z = value; }
+    material = new MeshLambertMaterial();
+    geometry = new EdgesGeometry(new PlaneGeometry(1, 1));
 
-    get width(): number { return this.size.width; }
-    set width(value: number) { this.size.width = value; }
-    get height(): number { return this.size.height; }
-    set height(value: number) { this.size.height = value; }
+    get x(): number { return this.position.x; }
+    get y(): number { return this.position.y; }
+    get z(): number { return this.position.z; }
+
+    get width(): number { return this.scale.x; }
+    set width(value: number) { this.scale.x = value; }
+    get height(): number { return this.scale.y; }
+    set height(value: number) { this.scale.y = value; }
+
+    get color(): Color { return this.material.color; }
+    set color(value: Color) { 
+        this.material.color = value;
+        this.material.emissive = value;
+    }
+
+    constructor(
+        geometry?: Geometry | BufferGeometry,
+        material?: Material | Material[]
+    );
+    constructor(...args: []) {
+        super(...args);
+
+        this.color = defaultColor;
+    }
 }

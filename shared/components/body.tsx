@@ -7,5 +7,5 @@ export function Body(props: { children?: JSX.Element | string[] } = {}): JSX.Ele
                 {props.children}
             </main>
         </React.Fragment>
-    )
+    );
 }
