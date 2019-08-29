@@ -29,8 +29,7 @@ const config: Webpack.Configuration = {
             "@constants": Path.join(CLIENT, "constants"),
             "@client": CLIENT,
             "@shared": SHARED,
-            "@three/shaders": Path.join(ROOT, "node_modules/three/examples/jsm/shaders/"),
-            "@three/postprocessing": Path.join(ROOT, "node_modules/three/examples/jsm/postprocessing/")
+            "@three": Path.join(ROOT, "node_modules/three/examples/jsm/")
         }
     },
     externals: {

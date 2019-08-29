@@ -13,13 +13,14 @@ const texture = new Promise<THREE.Texture>((resolve, _reject): void => {
 material.depthTest = false;
 material.depthWrite = false;
 
-export class BackgroundScene extends Scene {
+export class BackgroundRender {
+    scene: Scene;
     camera: PerspectiveCamera;
-    constructor() {
-        super();
 
-        this.background = new Color(0.015, 0.015, 0.08);
-
+    constructor() {        
+        this.scene = new Scene();
+        this.scene.background = new Color(0.015, 0.015, 0.08);
+        
         this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight);
         this.camera.translateZ(1);
 
@@ -31,12 +32,12 @@ export class BackgroundScene extends Scene {
                 geometry,
                 material
             );
-            this.add(mesh);
+            this.scene.add(mesh);
             // mesh.rotateX(10);
         };
 
         texture.then(onTextureLoaded);
-        this.add(this.camera);
+        this.scene.add(this.camera);
     }
 
     updateAspect(aspect: number): void {

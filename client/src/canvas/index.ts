@@ -1,7 +1,14 @@
 import * as THREE from "three";
-import { Scene, ReinhardToneMapping, WebGLRenderer, PerspectiveCamera } from "three";
-import { MainScene } from "./mainscene";
-
+import { Scene, ReinhardToneMapping, WebGLRenderer, PerspectiveCamera, Color, Vector2 } from "three";
+import { NexusRender } from "./nexusrender";
+import { MainComposer } from "./maincomposer";
+import { getSizeFromWindow, getClientSizeFromDOMElement } from "../utils";
+import { BackgroundRender } from "./background";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
+import { SMAAPass } from "@three/postprocessing/SMAAPass";
 declare global {
     interface Window {
         scene: Scene;
@@ -11,10 +18,7 @@ declare global {
 export function createWebGLRenderer(container: HTMLElement): WebGLRenderer {
     let renderer: WebGLRenderer;
 
-    const rendererParams: THREE.WebGLRendererParameters = {
-        alpha: true,
-        antialias: true
-    };
+    const rendererParams: THREE.WebGLRendererParameters = { };
 
     if (container instanceof HTMLCanvasElement) {
         renderer = new THREE.WebGLRenderer({
@@ -25,8 +29,6 @@ export function createWebGLRenderer(container: HTMLElement): WebGLRenderer {
         renderer = new THREE.WebGLRenderer(rendererParams);
         container.appendChild(renderer.domElement);
     }
-
-    renderer.autoClear = false;
     renderer.toneMapping = ReinhardToneMapping;
 
     return renderer;
@@ -38,15 +40,27 @@ export function initialize(containers: Containers = document.querySelectorAll(".
 
     const initializeEach = async (container: HTMLElement): Promise<void> => {
         const renderer = createWebGLRenderer(container);
-        const camera = new PerspectiveCamera(50, container.clientWidth / container.clientHeight);
-        const scene = new MainScene(renderer, camera);
+        const composer = new MainComposer(renderer, container.clientWidth, container.clientHeight);
 
-        camera.translateZ(2);
+        function updateSize(): void {
+            const parent = renderer.domElement.parentElement;
+            const size = parent ? getClientSizeFromDOMElement(parent) : getSizeFromWindow();
+            renderer.setSize(size.width, size.height);
+            composer.setSize(size.width, size.height);
+        }
 
-        window.addEventListener("resize", () => {
-            scene.setSize(container.clientWidth, container.clientHeight);
+        window.addEventListener("resize", updateSize);
+        updateSize();
+
+        let lastTimestamp: DOMHighResTimeStamp;
+        renderer.setAnimationLoop((now: DOMHighResTimeStamp) => {
+            composer.camera.rotateZ(0.01);
+            if (lastTimestamp)
+                composer.render(lastTimestamp - now);
+            else
+                composer.render();
+            lastTimestamp = now;
         });
-        renderer.setAnimationLoop(scene.render.bind(scene));
     };
 
     if ("length" in containers) {

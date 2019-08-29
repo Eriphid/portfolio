@@ -6,7 +6,7 @@ export class NexusElement extends Mesh {
     size: Size = new Size();
 
     material = new MeshLambertMaterial();
-    geometry = new EdgesGeometry(new PlaneGeometry(1, 1));
+    geometry = new PlaneGeometry(1, 1);
 
     get x(): number { return this.position.x; }
     get y(): number { return this.position.y; }
@@ -21,6 +21,7 @@ export class NexusElement extends Mesh {
     set color(value: Color) { 
         this.material.color = value;
         this.material.emissive = value;
+        this.material.emissiveIntensity = 0.5;
     }
 
     constructor(

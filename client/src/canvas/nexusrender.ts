@@ -1,9 +1,9 @@
 import * as THREE from "three";
-import { Camera, AmbientLight } from "three";
+import { Camera, AmbientLight, PointLight } from "three";
 import { NexusElement } from "../element";
 
 
-export class MainScene {
+export class NexusRender {
     // background = new BackgroundScene();
     scene = new THREE.Scene();
     // camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -17,6 +17,11 @@ export class MainScene {
         // window.scene = this.scene;
 
         this.scene.add(new AmbientLight(0xffffff, 0.5));
+        {
+            const light = new PointLight(0xffffff, 15);
+            light.translateZ(10);
+            this.scene.add(light);
+        }
 
         const e = new NexusElement();
         this.scene.add(e);
@@ -86,14 +91,4 @@ export class MainScene {
     render(): void {
         this.renderer.render(this.scene, this.camera);
     }
-
-    setSize(w: number, h: number): void {
-        // const w = parent.clientWidth, h = parent.clientHeight;
-        this.renderer.setSize(w, h);
-        const aspect = w / h;
-        // this.camera.aspect = aspect;
-        // this.camera.updateProjectionMatrix();
-        this.background.updateAspect(aspect);
-        // this.bloomComposer.setSize(w, h);
-    };
 }
