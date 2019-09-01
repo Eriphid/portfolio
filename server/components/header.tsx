@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Properties{
-    title?: string
+    title?: string;
 }
 
 export function Header(props: Properties = {}): React.ComponentElement<Properties, React.Component> {

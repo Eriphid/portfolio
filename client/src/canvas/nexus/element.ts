@@ -1,5 +1,5 @@
 import { Size } from "../../size";
-import { Mesh, PlaneGeometry, MeshLambertMaterial, Color, PlaneBufferGeometry, Geometry, BufferGeometry } from "three";
+import { Mesh, MeshLambertMaterial, Color, PlaneBufferGeometry, Geometry, BufferGeometry } from "three";
 
 export interface Link {
     a: NexusElement;
@@ -63,7 +63,7 @@ export class NexusElement {
                 ];
                 mesh.geometry = new BufferGeometry().fromGeometry(geometry);
             }
-        }
+        };
         link.update();
         a.links.push(link);
         b.links.push(link);

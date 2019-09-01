@@ -39,8 +39,7 @@ export class BackgroundRender {
                 geometry,
                 material
             );
-            this.camera.fov = fov;
-            this.camera.updateProjectionMatrix();
+            this.updateCamera();
             this.scene.add(mesh);
             // mesh.rotateX(10);
         };

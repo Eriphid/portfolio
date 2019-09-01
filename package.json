@@ -45,9 +45,9 @@
     "three": "^0.107.0"
   },
   "scripts": {
-    "debug": "cross-env NODE_ENV=development ts-node server.js",
-    "debug-express": "cross-env NODE_ENV=development DEBUG=express:* ts-node server.js",
-    "start": "node server.js",
+    "debug": "cross-env NODE_ENV=development ts-node index.js",
+    "debug-express": "cross-env NODE_ENV=development DEBUG=express:* ts-node index.js",
+    "start": "node index.js",
     "build": "webpack --config ./client/webpack.config.ts && webpack --config ./server/webpack.config.ts",
     "build-dev": "cross-env NODE_ENV=development webpack --config ./client/webpack.config.ts",
     "build-prod": "cross-env NODE_ENV=production webpack --config ./client/webpack.config.ts && webpack --config ./server/webpack.config.ts",
