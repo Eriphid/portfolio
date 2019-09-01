@@ -1,7 +1,7 @@
 import "module-alias/register";
 import Express from "express";
 import Routes from "./server/routes";
-import Morgan from "Morgan";
+import Morgan from "morgan";
 
 const app = Express();
 
