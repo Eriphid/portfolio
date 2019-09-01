@@ -4,7 +4,7 @@ import { RenderPass } from "@three/postprocessing/RenderPass";
 import { UnrealBloomPass } from "@three/postprocessing/UnrealBloomPass";
 import { NexusRender } from "./nexus/render";
 import { BackgroundRender } from "./background";
-import { SMAAPass } from "three/examples/jsm/postprocessing/SMAAPass";
+import { SMAAPass } from "@three/postprocessing/SMAAPass";
 
 export class MainComposer {
     readonly renderTarget?: WebGLRenderTarget;
@@ -33,7 +33,7 @@ export class MainComposer {
         this.composer.setSize(width, height);
 
         this.bgRender = new BackgroundRender();
-        this.nexusRender = new NexusRender(this.renderer, new PerspectiveCamera(50, width / height));
+        this.nexusRender = new NexusRender(this.renderer, new PerspectiveCamera(20, width / height));
         this.nexusRender.camera.translateZ(5);
 
         this.initializePass();
@@ -42,7 +42,7 @@ export class MainComposer {
     private initializePass(): void {
 
         const bgPass = new RenderPass(this.bgRender.scene, this.bgRender.camera);
-        const nexusPass = new RenderPass(this.nexusRender.scene, this.camera);
+        const nexusPass = new RenderPass(this.nexusRender.scene, this.nexusRender.camera);
 
         nexusPass.clear = false;
 
