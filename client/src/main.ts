@@ -1,4 +1,4 @@
-import { Router } from "@shared/components/router";
+import { MainRouter } from "@shared/components/mainrouter";
 import ReactDOM from "react-dom";
 
-ReactDOM.hydrate(Router(), document.getElementById("root"));
+ReactDOM.hydrate(MainRouter(), document.getElementById("root"));

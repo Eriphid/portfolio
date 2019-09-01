@@ -1,14 +1,7 @@
 import * as THREE from "three";
-import { Scene, ReinhardToneMapping, WebGLRenderer, PerspectiveCamera, Color, Vector2 } from "three";
-import { NexusRender } from "./nexusrender";
+import { Scene, ReinhardToneMapping, WebGLRenderer } from "three";
 import { MainComposer } from "./maincomposer";
 import { getSizeFromWindow, getClientSizeFromDOMElement } from "../utils";
-import { BackgroundRender } from "./background";
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
-import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
-import { SMAAPass } from "@three/postprocessing/SMAAPass";
 declare global {
     interface Window {
         scene: Scene;

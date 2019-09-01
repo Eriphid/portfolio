@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { Camera, AmbientLight, PointLight } from "three";
-import { NexusElement } from "../element";
+import { Nexus } from ".";
 
 
 export class NexusRender {
@@ -23,10 +23,19 @@ export class NexusRender {
             this.scene.add(light);
         }
 
-        const e = new NexusElement();
-        this.scene.add(e);
-        e.width = 2.5;
-        e.height = 1.5;
+        const nexus = new Nexus();
+
+        nexus.add();
+        nexus.add();
+        nexus.add();
+
+        nexus.update();
+
+        nexus.layers.forEach(layer => layer.elements.forEach(x => this.scene.add(x.mesh)));
+        // const e = new NexusElement();
+        // this.scene.add(e.mesh);
+        // e.width = 2.5;
+        // e.height = 1.5;
 
 
         // this.camera.translateZ(2);

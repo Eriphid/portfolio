@@ -1,0 +1,24 @@
+{
+    "list": [
+        {
+            "name": "Countdown",
+            "git": "https://github.com/Eriphid/countdown.git",
+            "repo": "projects\\countdown\\.git",
+            "start": {
+                "type": "HTML",
+                "filepath": "index.html"
+            },
+            "patches": [
+                "patches/countdown.patch"
+            ],
+            "routes": {
+                "/js": "/js",
+                "/videos": "/videos",
+                "/css": "/css",
+                "/audio": "/audio",
+                "/fonts": "/fonts",
+                "/images": "/images"
+            }
+        }
+    ]
+}

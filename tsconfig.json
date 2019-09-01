@@ -53,8 +53,9 @@
         "server/components/*",
         "client/components/*"
       ],
-      "@constants": ["client/constants"],
-      "@three/*" : ["./node_modules/three/examples/jsm/*"]
+      "@constants": ["server/constants"],
+      "@three/*" : ["./node_modules/three/examples/jsm/*"],
+      "@projects/*" : ["projects/*"]
     }, /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */

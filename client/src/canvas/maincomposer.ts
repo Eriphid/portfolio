@@ -2,7 +2,7 @@ import { WebGLRenderTarget, WebGLRenderer, Vector2, Texture, PerspectiveCamera }
 import { EffectComposer } from "@three/postprocessing/EffectComposer";
 import { RenderPass } from "@three/postprocessing/RenderPass";
 import { UnrealBloomPass } from "@three/postprocessing/UnrealBloomPass";
-import { NexusRender } from "./nexusrender";
+import { NexusRender } from "./nexus/render";
 import { BackgroundRender } from "./background";
 import { SMAAPass } from "three/examples/jsm/postprocessing/SMAAPass";
 
@@ -59,7 +59,7 @@ export class MainComposer {
     setSize(w: number, h: number): void {
         const aspect = w / h;
         this.composer.setSize(w, h);
-        this.bgRender.updateAspect(aspect);
+        this.bgRender.updateCamera(aspect);
         this.camera.aspect = aspect;
         this.camera.updateProjectionMatrix();
     }

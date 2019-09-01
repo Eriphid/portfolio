@@ -2,10 +2,17 @@ import { Texture, MeshBasicMaterial, Mesh, PlaneGeometry, PerspectiveCamera, Sce
 
 const loader = new TextureLoader();
 
+function degFromRad(rad: number): number {
+    return rad * 180 / Math.PI;
+}
+
+const fov = degFromRad(2 * Math.atan(1));
+let textureAspect = 1;
 const material = new MeshBasicMaterial();
 const texture = new Promise<THREE.Texture>((resolve, _reject): void => {
     material.map = loader.load("/images/background.png", (texture) => {
         texture.needsUpdate = true;
+        textureAspect = texture.image.width / texture.image.height;
         resolve(texture);
     });
 });
@@ -17,11 +24,11 @@ export class BackgroundRender {
     scene: Scene;
     camera: PerspectiveCamera;
 
-    constructor() {        
+    constructor() {
         this.scene = new Scene();
         this.scene.background = new Color(0.015, 0.015, 0.08);
-        
-        this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight);
+
+        this.camera = new PerspectiveCamera(fov, window.innerWidth / window.innerHeight);
         this.camera.translateZ(1);
 
         const onTextureLoaded = (texture: Texture): void => {
@@ -32,6 +39,8 @@ export class BackgroundRender {
                 geometry,
                 material
             );
+            this.camera.fov = fov;
+            this.camera.updateProjectionMatrix();
             this.scene.add(mesh);
             // mesh.rotateX(10);
         };
@@ -40,8 +49,17 @@ export class BackgroundRender {
         this.scene.add(this.camera);
     }
 
-    updateAspect(aspect: number): void {
-        this.camera.aspect = aspect;
+    updateCamera(aspect?: number): void {
+        if (aspect)
+            this.camera.aspect = aspect;
+        else
+            aspect = this.camera.aspect;
+        const d = this.camera.position.z;
+        if (aspect > textureAspect) {
+            this.camera.fov = degFromRad(2 * Math.atan(1 * textureAspect / (aspect * d)));
+        } else {
+            this.camera.fov = degFromRad(2 * Math.atan(1 / d));
+        }
         this.camera.updateProjectionMatrix();
     }
 }

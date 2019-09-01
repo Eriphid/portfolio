@@ -5,7 +5,7 @@ export class Home extends React.Component {
     canvas?: HTMLCanvasElement;
 
     componentDidMount(): void {
-        import("@client/src/canvas").then(module => {
+        import(/*webpackChunkName: "canvas"*/ "@client/src/canvas").then(module => {
             module.initialize(this.canvas);
         });
     }

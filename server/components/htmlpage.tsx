@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "./header";
-import { Router } from "@shared/components/router";
+import { MainRouter } from "@shared/components/mainrouter";
 import { renderToString } from "react-dom/server";
 
 interface Props {
@@ -16,7 +16,7 @@ export function HTMLPage(props: Props = {}): JSX.Element {
                 <Header title={props.title}></Header>
             </head>
             <body>
-                <div id="root" dangerouslySetInnerHTML={{ __html: renderToString(<Router location={props.location || "/"}></Router>) }}></div>
+                <div id="root" dangerouslySetInnerHTML={{ __html: renderToString(<MainRouter location={props.location || "/"}></MainRouter>) }}></div>
             </body>
         </html>
     );
