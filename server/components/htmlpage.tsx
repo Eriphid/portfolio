@@ -9,7 +9,7 @@ interface Props {
     location?: string;
 }
 
-export function HTMLPage(props: Props = {}): JSX.Element {
+export function HTMLPage(props: Props = {}): React.ComponentElement<Props, React.Component> {
     return (
         <html lang="en">
             <head>

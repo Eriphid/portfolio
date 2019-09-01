@@ -1,6 +1,10 @@
 import React from "react";
 
-export function Header(props: { title?: string } = {}): JSX.Element {
+interface Properties{
+    title?: string
+}
+
+export function Header(props: Properties = {}): React.ComponentElement<Properties, React.Component> {
     return (
         <React.Fragment>
             <meta charSet="UTF-8" />
