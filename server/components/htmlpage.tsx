@@ -5,7 +5,7 @@ import { renderToString } from "react-dom/server";
 
 interface Props {
     title?: string;
-    children?: JSX.Element | string[];
+    children?: React.ComponentElement<{}, React.Component> | string[];
     location?: string;
 }
 
