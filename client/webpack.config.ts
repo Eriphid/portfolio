@@ -13,6 +13,7 @@ const config: Webpack.Configuration = {
         path: Path.join(CLIENT, "dist"),
         chunkFilename: "[name].js"
     },
+    target: "web",
     module: {
         rules: [
             {

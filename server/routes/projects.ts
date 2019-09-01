@@ -8,7 +8,10 @@ import { applyPatches } from "diff";
 
 type ProjectsJSON = typeof import("@projects/projects.json");
 type Project = ProjectsJSON["list"][0];
-const JSONPath = require.resolve("@projects/projects.json");
+const JSONPath = Path.join(ROOT, "projects/projects.json");
+
+console.log(ROOT, JSONPath);
+
 
 interface Projects extends ProjectsJSON {
     list: (Project & {

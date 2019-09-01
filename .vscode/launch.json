@@ -9,7 +9,18 @@
             "request": "launch",
             "name": "Launch Server",
             "runtimeArgs": ["-r", "ts-node/register"],
-            "args": ["server.ts"],
+            "args": ["server/index.ts"],
+            "outputCapture": "std" ,
+            "env": {
+                "NODE_ENV": "development"
+            }   
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Current File",
+            "runtimeArgs": ["-r", "ts-node/register"],
+            "args": ["${file}"],
             "outputCapture": "std" ,
             "env": {
                 "NODE_ENV": "development"
