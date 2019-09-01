@@ -41,8 +41,8 @@ const config: Webpack.Configuration = {
     resolve: {
         extensions: [".ts", ".tsx", ".js"],
         alias: {
-            "@components": Path.join(CLIENT, "components"),
-            "@constants": Path.join(CLIENT, "constants"),
+            "@components": Path.join(SHARED, "components"),
+            "@constants": Path.join(SERVER, "constants"),
             "@client": CLIENT,
             "@server": SERVER,
             "@shared": SHARED,
