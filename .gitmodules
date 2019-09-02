@@ -1,0 +1,4 @@
+[submodule "Countdown"]
+ignore = all
+path = projects/countdown
+url = git://github.com/Eriphid/countdown.git
