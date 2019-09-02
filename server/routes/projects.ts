@@ -106,10 +106,10 @@ Promise.all(promises).then(() => {
         const git = project.git.replace(/^https?:/, "git:");
         const path = Path.dirname(project.repo).replace(/\\/g, "/");
         gitmodules += `[submodule "${project.name}"]\n`;
-        gitmodules += "ignore = all\n";
+        gitmodules += "ignore = dirty\n";
         gitmodules += `path = ${path}\n`;
         gitmodules += `url = ${git}\n`;
-    })
+    });
     writeFileSync(Path.join(ROOT, ".gitmodules"), gitmodules);
 });
 
