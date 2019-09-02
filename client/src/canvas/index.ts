@@ -47,7 +47,7 @@ export function initialize(containers: Containers = document.querySelectorAll(".
 
         let lastTimestamp: DOMHighResTimeStamp;
         renderer.setAnimationLoop((now: DOMHighResTimeStamp) => {
-            composer.camera.rotateZ(0.01);
+            composer.nexusRender.scene.rotateZ(0.01);
             if (lastTimestamp)
                 composer.render(lastTimestamp - now);
             else

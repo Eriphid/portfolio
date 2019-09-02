@@ -75,8 +75,8 @@ export class Nexus {
     links: Mesh[] = [];
 
     add(): void {
-        this._nodes.push(new NexusElement());
-        // const element = new NexusElement();
+        const element = new NexusElement();
+        this._nodes.push(element);
         // let layer = this.layers[length - 1];
         // if (!layer || layer.elements.length < layer.capacity) {
         //     layer = createNextLayer(this.layers);

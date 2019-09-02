@@ -10,9 +10,6 @@ type ProjectsJSON = typeof import("@projects/projects.json");
 type Project = ProjectsJSON["list"][0];
 const JSONPath = Path.join(ROOT, "projects/projects.json");
 
-console.log(ROOT, JSONPath);
-
-
 interface Projects extends ProjectsJSON {
     list: (Project & {
         repo?: string;
@@ -27,6 +24,9 @@ const promises = Projects.list.map(async (project) => {
     let repo: Repository;
     if (!project.repo || !existsSync(project.repo)) {
         const repoPath = Path.join(ROOT, "projects", project.name.toLowerCase());
+        if(existsSync(repoPath)) {
+            unlinkSync(repoPath);
+        }
         repo = await Clone.clone(project.git, repoPath);
         project.repo = Path.relative(ROOT, repo.path());
     } else {
