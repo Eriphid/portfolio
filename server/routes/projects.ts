@@ -99,7 +99,19 @@ const promises = Projects.list.map(async (project) => {
     router.use("/" + name, projectRouter);
 });
 
-Promise.all(promises).then(() => writeFileSync(JSONPath, JSON.stringify(Projects, null, 4)));
+Promise.all(promises).then(() => {
+    writeFileSync(JSONPath, JSON.stringify(Projects, null, 4));
+    let gitmodules = "";
+    Projects.list.forEach(project => {
+        const git = project.git.replace(/^https?:/, "git:");
+        const path = Path.dirname(project.repo).replace(/\\/g, "/");
+        gitmodules += `[submodule "${project.name}"]\n`;
+        gitmodules += "ignore = all\n";
+        gitmodules += `path = ${path}\n`;
+        gitmodules += `url = ${git}\n`;
+    })
+    writeFileSync(Path.join(ROOT, ".gitmodules"), gitmodules);
+});
 
 
 // router.use((req, res, next) => {
