@@ -6,6 +6,10 @@ import { Nexus } from ".";
 export class NexusRender {
     // background = new BackgroundScene();
     scene = new THREE.Scene();
+    lights: {
+        ambient: AmbientLight;
+        spot: PointLight;
+    }
     // camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     // renderer: THREE.WebGLRenderer;
     // canvas: HTMLCanvasElement;
@@ -16,11 +20,16 @@ export class NexusRender {
         // Debug
         // window.scene = this.scene;
 
-        this.scene.add(new AmbientLight(0xffffff, 0.5));
         {
-            const light = new PointLight(0xffffff, 15);
-            light.translateZ(10);
-            this.scene.add(light);
+            this.lights = {
+                spot: new PointLight(0xffffff, 15),
+                ambient: new AmbientLight(0xffffff, 0.5)
+            };
+            this.lights.spot.translateZ(10);
+            for (const key in this.lights) {
+                const light = this.lights[key];
+                this.scene.add(light);
+            }
         }
 
         const nexus = new Nexus();

@@ -1,11 +1,10 @@
-import { WebGLRenderTarget, WebGLRenderer, Vector2, Texture, PerspectiveCamera, LuminanceFormat } from "three";
+import { WebGLRenderTarget, WebGLRenderer, Vector2, Texture, PerspectiveCamera } from "three";
 import { EffectComposer } from "@three/postprocessing/EffectComposer";
 import { RenderPass } from "@three/postprocessing/RenderPass";
 import { UnrealBloomPass } from "@three/postprocessing/UnrealBloomPass";
 import { NexusRender } from "./nexus/render";
 import { BackgroundRender } from "./background";
 import { SMAAPass } from "@three/postprocessing/SMAAPass";
-import { Vector3 } from "three";
 
 export class MainComposer {
     readonly renderTarget?: WebGLRenderTarget;
@@ -66,20 +65,17 @@ export class MainComposer {
         this.camera.aspect = aspect;
         this.camera.updateProjectionMatrix();
     }
-    alpha: number;
-    arr: [] = [];
     private mouseMove(event: MouseEvent): void {
         const r = 5;
 
         const maxR = Math.min(window.innerHeight, window.innerWidth) / 2;
         let x = event.screenX - window.innerWidth * 0.5;
         let y = event.screenY - window.innerHeight * 0.5;
-        const d = Math.min(Math.sqrt(x ** 2 + y ** 2), maxR)* 0.5 / maxR;
+        const d = Math.min(Math.sqrt(x ** 2 + y ** 2), maxR)* 0.8 / maxR;
 
         let angleZ = Math.atan(x / y);
         if(y > 0)
             angleZ += Math.PI;
-        this.alpha = angleZ;
 
         y = Math.cos(angleZ) * d * r;
         x = -Math.sin(angleZ) * d * r;
@@ -89,6 +85,8 @@ export class MainComposer {
         const z = Math.sin(angleXY) * r;
 
         this.camera.position.set(x, y, z);
-        this.camera.lookAt(x * 0.05, y * 0.05, 0);
+        this.camera.lookAt(x * 0.1, y * 0.1, 0);
+
+        this.nexusRender.lights.spot.quaternion.copy(this.camera.quaternion);
     }
 }

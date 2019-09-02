@@ -13,7 +13,6 @@ export class NexusElement {
     readonly mesh: Mesh = new Mesh();
     size: Size = new Size();
 
-
     links: Link[] = [];
 
     get material(): MeshLambertMaterial { return this.mesh.material as MeshLambertMaterial; }
@@ -44,7 +43,7 @@ export class NexusElement {
         this.geometry = new PlaneBufferGeometry(1, 1);
         this.material = new MeshLambertMaterial();
 
-        this.material.emissiveIntensity = 0.5;
+        this.material.emissiveIntensity = 0.25;
         this.color = defaultColor;
     }
 
